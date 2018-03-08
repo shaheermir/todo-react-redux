@@ -3,17 +3,22 @@ import reducer from '../reducers'
 import throttle from 'lodash/throttle'
 import { loadState, saveState } from './localStorage'
 
-const persistedState = loadState()
+const configureStore = () => {
+  const persistedState = loadState()
 
-const store = createStore(reducer, persistedState)
-store.subscribe(
-  throttle(
-    () =>
-      saveState({
-        todos: store.getState().todos
-      }),
-    1000
+  const store = createStore(reducer, persistedState)
+
+  store.subscribe(
+    throttle(
+      () =>
+        saveState({
+          todos: store.getState().todos
+        }),
+      1000
+    )
   )
-)
 
-export default store
+  return store
+}
+
+export default configureStore
