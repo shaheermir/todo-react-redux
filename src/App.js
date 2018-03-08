@@ -1,17 +1,14 @@
 import React from 'react'
-import store from './config/store'
 
 import AddTodo from './components/AddTodo'
-import VisibleTodoList from './components/VisibleTodoList'
+import TodoList from './components/TodoList'
 import Footer from './components/Footer'
-
-let nextTodoId = 0
 
 const App = () => {
   return (
     <React.Fragment>
       <AddTodo />
-      <VisibleTodoList />
+      <TodoList />
       <Footer />
     </React.Fragment>
   )

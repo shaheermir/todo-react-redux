@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../config/store'
+import { connect } from 'react-redux'
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -7,7 +7,7 @@ const Link = ({ active, children, onClick }) => {
   }
   return (
     <a
-      href="#"
+      href='#'
       onClick={e => {
         e.preventDefault()
         onClick()
@@ -18,4 +18,12 @@ const Link = ({ active, children, onClick }) => {
   )
 }
 
-export default Link
+const mapStateToProps = (state, ownProps) => ({
+  active: ownProps.filter === state.visibilityFilter
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClick: () => dispatch({ type: 'SET_VISIBILITY_FILTER', filter: ownProps.filter })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Link)

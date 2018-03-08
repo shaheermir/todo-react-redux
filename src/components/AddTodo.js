@@ -1,17 +1,16 @@
 import React from 'react'
-
-import store from '../config/store'
+import { connect } from 'react-redux'
 
 let nextTodoId = 0
 
-const AddTodo = ({ onAddClick }) => {
+const AddTodo = ({ dispatch }) => {
   let input
   return (
     <div>
       <input ref={node => (input = node)} />
       <button
         onClick={() => {
-          store.dispatch({ type: 'ADD_TODO', id: nextTodoId++, text: input.value })
+          dispatch({ type: 'ADD_TODO', id: nextTodoId++, text: input.value })
           input.value = ''
         }}
       >
@@ -21,4 +20,4 @@ const AddTodo = ({ onAddClick }) => {
   )
 }
 
-export default AddTodo
+export default connect()(AddTodo)
