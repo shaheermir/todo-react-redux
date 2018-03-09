@@ -3,10 +3,32 @@ import reducer from '../reducers'
 import throttle from 'lodash/throttle'
 import { loadState, saveState } from './localStorage'
 
+const addLoggingToDispatch = store => {
+  const rawDispatch = store.dispatch
+
+  if (!console.group) {
+    return rawDispatch
+  }
+
+  return action => {
+    console.group(action.type)
+    console.log('%c Previous State', 'color: gray', store.getState())
+    console.log('%c Action', 'color: blue', action)
+    const returnValue = rawDispatch(action)
+    console.log('%c Next State', 'color: green', store.getState())
+    console.groupEnd(action.type)
+    return returnValue
+  }
+}
+
 const configureStore = () => {
   const persistedState = loadState()
 
   const store = createStore(reducer, persistedState)
+
+  if (process.env.NODE_ENV !== 'production') {
+    store.dispatch = addLoggingToDispatch(store)
+  }
 
   store.subscribe(
     throttle(
