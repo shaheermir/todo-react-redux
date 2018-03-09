@@ -4,11 +4,12 @@ import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import Footer from './Footer'
 
-const App = () => {
+const App = ({ params }) => {
+  console.log(params)
   return (
     <React.Fragment>
       <AddTodo />
-      <TodoList />
+      <TodoList filter={params.filter || 'all'} />
       <Footer />
     </React.Fragment>
   )
