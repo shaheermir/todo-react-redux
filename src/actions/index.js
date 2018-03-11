@@ -1,7 +1,5 @@
 import { v4 } from 'node-uuid'
-
-export const ADD_TODO = 'ADD_TODO'
-export const TOGGLE_TODO = 'TOGGLE_TODO'
+import { ADD_TODO, TOGGLE_TODO, RECEIVE_TODOS } from './types'
 
 export const addTodo = text => ({
   type: ADD_TODO,
@@ -12,4 +10,9 @@ export const addTodo = text => ({
 export const toggleTodo = id => ({
   type: TOGGLE_TODO,
   id
+})
+
+export const receiveTodos = (filter, response) => ({
+  type: RECEIVE_TODOS,
+  response
 })

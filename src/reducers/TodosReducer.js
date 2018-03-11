@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import todo from './TodoReducer'
-import { ADD_TODO, TOGGLE_TODO } from '../actions'
+import { ADD_TODO, TOGGLE_TODO } from '../actions/types'
 
 const INITIAL_STATE = {}
 
