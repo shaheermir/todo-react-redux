@@ -1,3 +1,4 @@
+/*
 export const loadState = () => {
   try {
     const serializedState = window.localStorage.getItem('state')
@@ -19,3 +20,4 @@ export const saveState = state => {
     console.log('save state to local storage error', err)
   }
 }
+*/
