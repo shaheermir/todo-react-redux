@@ -2,7 +2,7 @@ import { v4 } from 'node-uuid'
 import * as api from '../api'
 import { ADD_TODO, TOGGLE_TODO, RECEIVE_TODOS } from './types'
 
-export const requestTodos = filter => ({
+const requestTodos = filter => ({
   type: 'REQUEST_TODOS',
   filter
 })
@@ -18,9 +18,12 @@ export const toggleTodo = id => ({
   id
 })
 
-export const fetchTodos = filter =>
-  api.fetchTodos(filter).then(response => receiveTodos(filter, response))
-
+export const fetchTodos = filter => dispatch => {
+  dispatch(requestTodos(filter))
+  return api.fetchTodos(filter).then(response => {
+    dispatch(receiveTodos(filter, response))
+  })
+}
 const receiveTodos = (filter, response) => ({
   type: RECEIVE_TODOS,
   filter,
