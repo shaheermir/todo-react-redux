@@ -2,6 +2,11 @@ import { v4 } from 'node-uuid'
 import * as api from '../api'
 import { ADD_TODO, TOGGLE_TODO, RECEIVE_TODOS } from './types'
 
+export const requestTodos = filter => ({
+  type: 'REQUEST_TODOS',
+  filter
+})
+
 export const addTodo = text => ({
   type: ADD_TODO,
   id: v4(),
