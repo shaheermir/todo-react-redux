@@ -1,5 +1,3 @@
-import { FETCH_TODOS_SUCCESS, ADD_TODO_SUCCESS } from '../actions/types'
-
 const byId = (state = {}, action) => {
   if (action.response) {
     return {
