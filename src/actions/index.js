@@ -1,19 +1,20 @@
-import { v4 } from 'node-uuid'
 import * as api from '../api'
 import { getIsFetching } from '../reducers'
 import {
-  ADD_TODO,
   TOGGLE_TODO,
   FETCH_TODOS_FAILURE,
   FETCH_TODOS_REQUEST,
-  FETCH_TODOS_SUCCESS
+  FETCH_TODOS_SUCCESS,
+  ADD_TODO_SUCCESS
 } from './types'
 
-export const addTodo = text => ({
-  type: ADD_TODO,
-  id: v4(),
-  text
-})
+export const addTodo = text => dispatch =>
+  api.addTodo(text).then(response => {
+    dispatch({
+      type: ADD_TODO_SUCCESS,
+      response
+    })
+  })
 
 export const toggleTodo = id => ({
   type: TOGGLE_TODO,
